@@ -1,0 +1,73 @@
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 1.75rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.education-card {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.edu-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edu-icon-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--accent-gradient);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+.edu-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.degree-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.institution-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--accent-secondary);
+}
+
+.specialization-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+
+.edu-description {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 576px) {
+  .education-grid {
+    grid-template-columns: 1fr;
+  }
+}
