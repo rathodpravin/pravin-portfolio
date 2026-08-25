@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { personalBrand } from '../data/portfolioData';
-import { Mail, Linkedin, Github, Send, ShieldCheck, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Linkedin, Github, Send, ShieldCheck, CheckCircle2, AlertCircle, Copy, Check } from 'lucide-react';
 import './Contact.css';
 
 export default function Contact() {
@@ -13,6 +13,8 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState(null); // 'submitting' | 'success' | 'error'
+  const [submitMessage, setSubmitMessage] = useState('');
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const [lastSubmitTime, setLastSubmitTime] = useState(0);
 
   // Security input sanitizer to prevent XSS / script injection
@@ -27,6 +29,16 @@ export default function Contact() {
       };
       return entities[char] || char;
     }).trim();
+  };
+
+  const handleCopyEmail = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(personalBrand.socials.email);
+    setCopiedEmail(true);
+    setTimeout(() => {
+      setCopiedEmail(false);
+    }, 2500);
   };
 
   const validateForm = () => {
@@ -60,13 +72,12 @@ export default function Contact() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear field error on change
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: null }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus(null);
 
@@ -84,24 +95,58 @@ export default function Contact() {
     setStatus('submitting');
     setLastSubmitTime(now);
 
-    // XSS Sanitized data construct
-    const sanitizedSubject = encodeURIComponent(sanitizeInput(formData.subject));
+    const cleanName = sanitizeInput(formData.name);
+    const cleanEmail = sanitizeInput(formData.email);
+    const cleanSubject = sanitizeInput(formData.subject);
+    const cleanMessage = sanitizeInput(formData.message);
+
+    const web3Key = import.meta.env?.VITE_WEB3FORMS_ACCESS_KEY;
+
+    if (web3Key) {
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({
+            access_key: web3Key,
+            to_email: personalBrand.socials.email,
+            name: cleanName,
+            email: cleanEmail,
+            subject: cleanSubject,
+            message: cleanMessage,
+            from_name: `${cleanName} (Portfolio Contact)`
+          })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          setStatus('success');
+          setSubmitMessage(`Thank you, ${cleanName}! Your message has been delivered to ${personalBrand.socials.email}.`);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+          return;
+        }
+      } catch (err) {
+        console.warn('Web3Forms submission error, triggering mailto fallback:', err);
+      }
+    }
+
+    // Direct Mailto Client Fallback addressing prathod8806@gmail.com
+    const sanitizedSubject = encodeURIComponent(cleanSubject);
     const sanitizedBody = encodeURIComponent(
-      `Name: ${sanitizeInput(formData.name)}\n` +
-      `Email: ${sanitizeInput(formData.email)}\n\n` +
-      `Message:\n${sanitizeInput(formData.message)}`
+      `Name: ${cleanName}\n` +
+      `Sender Email: ${cleanEmail}\n\n` +
+      `Message:\n${cleanMessage}`
     );
 
-    // Simulate safe processing & fallback to direct mailto client handler
     setTimeout(() => {
       setStatus('success');
-      
-      // Trigger default mail client securely
+      setSubmitMessage(`Opening your email client to send message directly to ${personalBrand.socials.email}...`);
       window.location.href = `mailto:${personalBrand.socials.email}?subject=${sanitizedSubject}&body=${sanitizedBody}`;
-
-      // Reset form fields
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 600);
+    }, 500);
   };
 
   return (
@@ -122,22 +167,36 @@ export default function Contact() {
           <div class="contact-info-column">
             <h3 class="info-column-title">Let's Connect Directly</h3>
             <p class="info-column-desc">
-              Feel free to reach out via direct email, LinkedIn, or explore my open-source repositories on GitHub.
+              Send me an email directly at <strong class="email-highlight">{personalBrand.socials.email}</strong> or reach out via LinkedIn &amp; GitHub.
             </p>
 
             <div class="contact-cards-list">
-              <a
-                href={personalBrand.socials.emailUrl}
-                class="contact-card glass-card"
-              >
-                <div class="contact-card-icon">
-                  <Mail size={22} />
-                </div>
-                <div class="contact-card-text">
-                  <span class="card-label">Email Me</span>
-                  <span class="card-value">{personalBrand.socials.email}</span>
-                </div>
-              </a>
+              <div class="contact-card-wrapper glass-card">
+                <a
+                  href={personalBrand.socials.emailUrl}
+                  class="contact-card-inner"
+                  title="Send email via your email app"
+                >
+                  <div class="contact-card-icon">
+                    <Mail size={22} />
+                  </div>
+                  <div class="contact-card-text">
+                    <span class="card-label">Direct Email</span>
+                    <span class="card-value">{personalBrand.socials.email}</span>
+                  </div>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  class={`copy-email-btn ${copiedEmail ? 'copied' : ''}`}
+                  title="Copy email address to clipboard"
+                  aria-label="Copy Email Address"
+                >
+                  {copiedEmail ? <Check size={16} /> : <Copy size={16} />}
+                  <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
+                </button>
+              </div>
 
               <a
                 href={personalBrand.socials.linkedin}
@@ -173,9 +232,9 @@ export default function Contact() {
             <div class="security-assurance-box glass-card">
               <ShieldCheck size={20} class="security-icon" />
               <div>
-                <h4 class="assurance-title">Privacy &amp; Security Assured</h4>
+                <h4 class="assurance-title">Direct &amp; Secure Delivery</h4>
                 <p class="assurance-desc">
-                  Inputs are sanitized client-side. No sensitive data, secrets, or API keys are stored in frontend local storage.
+                  All messages sent through this form are routed to <strong>{personalBrand.socials.email}</strong>. Client-side XSS protection is active.
                 </p>
               </div>
             </div>
@@ -183,13 +242,19 @@ export default function Contact() {
 
           {/* Secure Contact Form */}
           <div class="contact-form-column glass-card">
-            <h3 class="form-title">Send a Message</h3>
-            
+            <div class="form-header-badge-row">
+              <h3 class="form-title">Send a Message</h3>
+              <span class="recipient-badge">
+                <Mail size={13} />
+                To: {personalBrand.socials.email}
+              </span>
+            </div>
+
             {status === 'success' && (
               <div class="alert alert-success">
                 <CheckCircle2 size={20} />
                 <div>
-                  <strong>Message Prepared!</strong> Opening your email client to complete sending.
+                  <strong>Message Ready!</strong> {submitMessage}
                 </div>
               </div>
             )}
@@ -240,7 +305,7 @@ export default function Contact() {
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  placeholder="e.g. Job Opportunity / Technical Discussion"
+                  placeholder="e.g. Job Opportunity / Technical Inquiry"
                   class={`form-input ${errors.subject ? 'input-error' : ''}`}
                   required
                 />
@@ -255,7 +320,7 @@ export default function Contact() {
                   rows="5"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Share details about the role, project, or technical topic..."
+                  placeholder="Share details about the job opportunity, company, or project..."
                   class={`form-input form-textarea ${errors.message ? 'input-error' : ''}`}
                   required
                 ></textarea>
@@ -268,7 +333,7 @@ export default function Contact() {
                 class="btn btn-primary btn-submit"
               >
                 <Send size={18} />
-                {status === 'submitting' ? 'Processing...' : 'Send Message'}
+                {status === 'submitting' ? 'Sending to prathod8806@gmail.com...' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -277,3 +342,4 @@ export default function Contact() {
     </section>
   );
 }
+
