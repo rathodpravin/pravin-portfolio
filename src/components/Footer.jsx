@@ -50,8 +50,16 @@ export default function Footer() {
 
             <a
               href={personalBrand.socials.emailUrl}
-              class="footer-social-link"
-              aria-label="Email"
+              className="footer-social-link"
+              aria-label="Send me an email"
+              title="Email Me"
+              onClick={(e) => {
+                window.location.href = personalBrand.socials.emailUrl;
+                setTimeout(() => {
+                  window.open(personalBrand.socials.gmailUrl, '_blank', 'noopener,noreferrer');
+                }, 300);
+                e.preventDefault();
+              }}
             >
               <Mail size={18} />
               <span>Email</span>

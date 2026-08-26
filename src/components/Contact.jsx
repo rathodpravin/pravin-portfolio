@@ -40,11 +40,23 @@ export default function Contact() {
             </p>
 
             <div className="contact-cards-list">
-              <div className="contact-card-wrapper glass-card">
+              <div
+                className="contact-card-wrapper glass-card"
+                onClick={(e) => {
+                  if (!e.target.closest('.copy-email-btn')) {
+                    window.location.href = personalBrand.socials.emailUrl;
+                    setTimeout(() => {
+                      window.open(personalBrand.socials.gmailUrl, '_blank', 'noopener,noreferrer');
+                    }, 300);
+                  }
+                }}
+                style={{ cursor: 'pointer' }}
+              >
                 <a
                   href={personalBrand.socials.emailUrl}
                   className="contact-card-inner"
-                  title="Send email via your email app"
+                  aria-label="Send me an email"
+                  title="Email Me"
                 >
                   <div className="contact-card-icon">
                     <Mail size={22} />

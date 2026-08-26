@@ -3,6 +3,20 @@
  * Full-Stack Java Developer Portfolio Data
  */
 
+const emailSubject = encodeURIComponent("Portfolio Contact – Let's Connect");
+const emailBody = encodeURIComponent(
+`Hello Pravin,
+
+I came across your portfolio and would like to connect with you.
+
+Name:
+Company:
+Purpose:
+Message:
+
+Regards,`
+);
+
 export const personalBrand = {
   name: "Pravin Rathod", 
   title: "Full-Stack Java Developer",
@@ -25,7 +39,8 @@ export const personalBrand = {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
     email: "prathod8806@gmail.com",
-    emailUrl: "mailto:prathod8806@gmail.com"
+    emailUrl: `mailto:prathod8806@gmail.com?subject=${emailSubject}&body=${emailBody}`,
+    gmailUrl: `https://mail.google.com/mail/?view=cm&fs=1&to=prathod8806@gmail.com&su=${emailSubject}&body=${emailBody}`
   }
 };
 

@@ -61,11 +61,6 @@ export default function Hero() {
               <Download size={18} />
               Download Resume
             </a>
-
-            <a href="#contact" class="btn btn-outline">
-              <Mail size={18} />
-              Contact Me
-            </a>
           </div>
 
           {/* Social Links */}
@@ -96,9 +91,16 @@ export default function Hero() {
               
               <a
                 href={personalBrand.socials.emailUrl}
-                class="social-link"
-                aria-label="Send Email"
-                title="Email"
+                className="social-link"
+                aria-label="Send me an email"
+                title="Email Me"
+                onClick={(e) => {
+                  window.location.href = personalBrand.socials.emailUrl;
+                  setTimeout(() => {
+                    window.open(personalBrand.socials.gmailUrl, '_blank', 'noopener,noreferrer');
+                  }, 300);
+                  e.preventDefault();
+                }}
               >
                 <Mail size={20} />
               </a>
