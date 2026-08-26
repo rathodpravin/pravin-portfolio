@@ -53,10 +53,10 @@ export default function Hero() {
             
             <a 
               href={personalBrand.resumeUrl} 
-              download="Resume.pdf"
+              download="Pravin_Rathod_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-secondary"
+              className="btn btn-secondary"
             >
               <Download size={18} />
               Download Resume

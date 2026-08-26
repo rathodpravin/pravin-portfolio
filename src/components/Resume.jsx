@@ -31,10 +31,10 @@ export default function Resume() {
           <div class="resume-action-box">
             <a
               href={personalBrand.resumeUrl}
-              download="FullStack_Java_Developer_Resume.pdf"
+              download="Pravin_Rathod_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-primary btn-lg"
+              className="btn btn-primary btn-lg"
             >
               <Download size={20} />
               Download Resume (PDF)

@@ -20,7 +20,7 @@ export const personalBrand = {
   ],
 
   profileImage: "/assets/profile/profile.webp",
-  resumeUrl: "/assets/resume/resume.pdf",
+  resumeUrl: "/assets/resume/Pravin_Rathod_Resume.pdf",
   socials: {
     github: "https://github.com",
     linkedin: "https://linkedin.com",
