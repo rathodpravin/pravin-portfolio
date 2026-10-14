@@ -72,35 +72,74 @@ export const skillsData = [
   }
 ];
 
-export const featuredProject = {
-  id: "online-shopping-website",
-  name: "ONLINE SHOPPING WEBSITE",
-  badge: "Featured E-Commerce Solution",
-  shortDescription: "Full-stack e-commerce application built using React.js, Spring Boot and MySQL.",
-  fullDescription: "An enterprise-grade e-commerce application engineered by Pravin Rathod featuring secure JWT authentication with Spring Security, dynamic product browsing and cart management, transaction processing, and responsive React frontend integration.",
-  image: "/assets/projects/online-shopping.webp",
-  technologies: [
-    "Java",
-    "Spring Boot",
-    "React.js",
-    "MySQL",
-    "REST API",
-    "Spring Security",
-    "JWT",
-    "Git",
-    "GitHub"
-  ],
-  keyFeatures: [
-    "User authentication & authorization via Spring Security & JWT",
-    "Product catalog with instant search, category filtering, and inventory status",
-    "Shopping cart state management with real-time total calculations",
-    "Secure order placement, status management, and transaction handling",
-    "RESTful API integration with relational MySQL persistence",
-    "Hardened backend security with CORS control, BCrypt hashing, and validation"
-  ],
-  githubUrl: "https://github.com",
-  demoUrl: "https://demo.example.com"
-};
+export const featuredProjects = [
+  {
+    id: "ai-job-portal",
+    number: "01",
+    name: "AI-Powered Job Portal & Resume Analyzer",
+    badge: "AI + Full-Stack",
+    accentColor: "violet",
+    shortDescription: "A smart recruitment platform connecting job seekers and recruiters with AI-driven resume analysis and intelligent job matching.",
+    technologies: [
+      "Java", "Spring Boot", "React.js", "MySQL",
+      "Spring Security", "JWT", "REST APIs"
+    ],
+    keyFeatures: [
+      "Job seeker and recruiter authentication with role-based access",
+      "Job posting, browsing, and application management",
+      "Resume upload with automated skill extraction",
+      "AI-powered resume analysis and smart job matching",
+      "Admin dashboard with analytics and platform management"
+    ],
+    whyChoose: "Demonstrates full-stack development, secure APIs, file handling, and AI integration — a complete, recruiter-facing product.",
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "banking-transaction-system",
+    number: "02",
+    name: "Banking & Financial Transaction Management System",
+    badge: "Enterprise Backend",
+    accentColor: "emerald",
+    shortDescription: "A secure, enterprise-grade banking backend handling accounts, fund transfers, transaction consistency, and real-time fraud alerting.",
+    technologies: [
+      "Java", "Spring Boot", "Spring Security", "Spring Data JPA",
+      "Hibernate", "MySQL", "JWT", "Kafka", "Docker"
+    ],
+    keyFeatures: [
+      "Secure JWT authentication and role-based authorization",
+      "Bank account creation and full transaction management",
+      "Fund transfers with ACID-compliant transaction consistency",
+      "Transaction history with downloadable PDF statements",
+      "Audit logs and real-time suspicious-transaction alerts via Kafka"
+    ],
+    whyChoose: "Demonstrates Core Java mastery, database transactions, enterprise security, event-driven architecture with Kafka, and Docker containerization.",
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "ecommerce-order-management",
+    number: "03",
+    name: "E-Commerce & Order Management System",
+    badge: "Scalable Full-Stack",
+    accentColor: "cyan",
+    shortDescription: "A high-performance e-commerce platform with product catalog, cart, inventory, payment gateway, and real-time order notifications.",
+    technologies: [
+      "Java", "Spring Boot", "React.js", "MySQL",
+      "Spring Security", "JWT", "Redis", "Kafka", "Docker"
+    ],
+    keyFeatures: [
+      "Dynamic product catalog with advanced search and filtering",
+      "Shopping cart, checkout, and payment gateway integration",
+      "Inventory and order lifecycle management",
+      "Real-time order status notifications via Kafka",
+      "Admin dashboard with sales analytics and product management"
+    ],
+    whyChoose: "Demonstrates REST API design, complex database relationships, business logic, caching with Redis, and scalable application architecture.",
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  }
+];
 
 export const secondaryProjects = [
   {
@@ -131,6 +170,163 @@ export const secondaryProjects = [
       "Optimized Spring Data JPA repositories with indexed queries",
       "Automated stock alerts and exportable transaction reports",
       "Clean dark-mode interface optimized for mobile and desktop"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "logistics-delivery-platform",
+    name: "Real-Time Logistics & Delivery Platform",
+    category: "Backend Enterprise API",
+    shortDescription: "Logistics management backend with JWT authentication, role-based authorization, and end-to-end delivery lifecycle management.",
+    image: "/assets/projects/logistics-platform.webp",
+    technologies: [
+      "Java",
+      "Spring Boot",
+      "Spring Security",
+      "JWT",
+      "Hibernate",
+      "Spring Data JPA",
+      "MySQL",
+      "REST APIs",
+      "Maven",
+      "Postman",
+      "Swagger/OpenAPI"
+    ],
+    keyFeatures: [
+      "JWT-based authentication & role-based authorization for secure access control",
+      "Driver management with profile, assignment, and availability tracking",
+      "Delivery lifecycle management — from creation to completion",
+      "Real-time delivery tracking and address management modules",
+      "Payment management with status handling and transaction records",
+      "Fully documented REST APIs via Swagger/OpenAPI"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "income-tax-application",
+    name: "Income Tax Application",
+    category: "Full-Stack Web App",
+    shortDescription: "User-friendly income tax filing app with multi-step form, client-side validation, and Spring Boot REST API integration.",
+    image: "/assets/projects/income-tax-app.webp",
+    technologies: [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "React.js",
+      "Java",
+      "Spring Boot",
+      "REST APIs",
+      "MySQL",
+      "Hibernate",
+      "Spring Data JPA"
+    ],
+    keyFeatures: [
+      "Multi-step form covering personal, contact, income, bank & document details",
+      "Robust client-side validation for error-free data submission",
+      "Spring Boot REST API backend with MySQL persistence via Hibernate/JPA",
+      "Responsive React.js frontend with clean and intuitive UX"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "hospital-management-system",
+    name: "Hospital Management System",
+    category: "Microservices Architecture",
+    shortDescription: "Microservices-based hospital platform with separate services for auth, patients, doctors, and appointments.",
+    image: "/assets/projects/hospital-management.webp",
+    technologies: [
+      "Java 21",
+      "Spring Boot",
+      "Spring Microservices",
+      "Spring Cloud Gateway",
+      "Eureka Server",
+      "Spring Security",
+      "JWT",
+      "React.js",
+      "MySQL",
+      "Hibernate",
+      "Spring Data JPA",
+      "REST APIs"
+    ],
+    keyFeatures: [
+      "Microservices architecture: Auth, Patient, Doctor & Appointment services",
+      "JWT-based authentication with Spring Security across all services",
+      "Spring Cloud Gateway for centralized API routing and filtering",
+      "Eureka Server for dynamic service discovery and load balancing",
+      "React.js frontend integrated with microservices REST APIs"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  }
+];
+
+export const builtProjects = [
+  {
+    id: "logistics-delivery-platform",
+    name: "Real-Time Logistics & Delivery Platform",
+    category: "Backend Enterprise API",
+    accentColor: "indigo",
+    shortDescription: "Logistics management backend with JWT authentication, role-based authorization, and end-to-end delivery lifecycle management.",
+    image: "/assets/projects/logistics-platform.webp",
+    technologies: [
+      "Java", "Spring Boot", "Spring Security", "JWT",
+      "Hibernate", "Spring Data JPA", "MySQL",
+      "REST APIs", "Maven", "Postman", "Swagger/OpenAPI"
+    ],
+    keyFeatures: [
+      "JWT-based authentication & role-based authorization for secure access control",
+      "Driver management with profile, assignment, and availability tracking",
+      "Delivery lifecycle management — from creation to completion",
+      "Real-time delivery tracking and address management modules",
+      "Payment management with status handling and transaction records",
+      "Fully documented REST APIs via Swagger/OpenAPI"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "income-tax-application",
+    name: "Income Tax Application",
+    category: "Full-Stack Web App",
+    accentColor: "cyan",
+    shortDescription: "User-friendly income tax filing app with multi-step form, client-side validation, and Spring Boot REST API integration.",
+    image: "/assets/projects/income-tax-app.webp",
+    technologies: [
+      "HTML", "CSS", "JavaScript", "React.js",
+      "Java", "Spring Boot", "REST APIs",
+      "MySQL", "Hibernate", "Spring Data JPA"
+    ],
+    keyFeatures: [
+      "Multi-step form covering personal, contact, income, bank & document details",
+      "Robust client-side validation for error-free data submission",
+      "Spring Boot REST API backend with MySQL persistence via Hibernate/JPA",
+      "Responsive React.js frontend with clean and intuitive UX"
+    ],
+    githubUrl: "https://github.com",
+    demoUrl: "https://demo.example.com"
+  },
+  {
+    id: "hospital-management-system",
+    name: "Hospital Management System",
+    category: "Microservices Architecture",
+    accentColor: "violet",
+    shortDescription: "Microservices-based hospital platform with separate services for auth, patients, doctors, and appointments.",
+    image: "/assets/projects/hospital-management.webp",
+    technologies: [
+      "Java 21", "Spring Boot", "Spring Microservices",
+      "Spring Cloud Gateway", "Eureka Server",
+      "Spring Security", "JWT", "React.js",
+      "MySQL", "Hibernate", "Spring Data JPA", "REST APIs"
+    ],
+    keyFeatures: [
+      "Microservices architecture: Auth, Patient, Doctor & Appointment services",
+      "JWT-based authentication with Spring Security across all services",
+      "Spring Cloud Gateway for centralized API routing and filtering",
+      "Eureka Server for dynamic service discovery and load balancing",
+      "React.js frontend integrated with microservices REST APIs"
     ],
     githubUrl: "https://github.com",
     demoUrl: "https://demo.example.com"

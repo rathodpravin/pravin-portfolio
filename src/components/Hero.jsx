@@ -1,143 +1,126 @@
 import React from 'react';
 import { personalBrand } from '../data/portfolioData';
-import { Github, Linkedin, Mail, ArrowDown, Download, ChevronRight, Zap, Code2, GraduationCap } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowDown, Download, ArrowRight } from 'lucide-react';
 import './Hero.css';
 
+const techPills = ['Java', 'Spring Boot', 'React.js', 'MySQL', 'REST APIs'];
+
 export default function Hero() {
+  const handleEmailClick = (e) => {
+    e.preventDefault();
+    window.location.href = personalBrand.socials.emailUrl;
+    setTimeout(() => {
+      window.open(personalBrand.socials.gmailUrl, '_blank', 'noopener,noreferrer');
+    }, 300);
+  };
+
   return (
-    <section id="home" class="hero-section section">
-      <div class="container hero-container">
-        {/* Left Side Content */}
-        <div class="hero-content">
-          <div class="hero-greeting-wrapper">
-            <span class="greeting-badge">
-              <span class="pulse-dot"></span>
-              {personalBrand.heroGreeting}
-            </span>
+    <section id="home" className="hero-section">
+      <div className="container hero-container">
+
+        {/* ── Left Column ── */}
+        <div className="hero-content">
+
+          {/* Availability Badge */}
+          <div className="hero-availability">
+            <span className="avail-dot" aria-hidden="true" />
+            <span>Available for Java Developer Opportunities</span>
           </div>
 
-          <h1 class="hero-name">
-            {personalBrand.name}
+          {/* Main Headline */}
+          <h1 className="hero-headline">
+            Building Reliable<br />
+            <span className="hero-headline-accent">Java Applications</span><br />
+            for the Modern Web.
           </h1>
 
-          <h2 class="hero-title">
-            <span class="gradient-text">{personalBrand.title}</span>
-          </h2>
-
-          <p class="hero-description">
-            {personalBrand.heroDescription}
+          {/* Description */}
+          <p className="hero-description">
+            I'm <strong>Pravin Rathod</strong>, a Full-Stack Java Developer focused on building
+            secure backend systems, clean REST APIs, and responsive web applications using
+            Java, Spring Boot, React.js, and MySQL.
           </p>
 
-          {/* Recruiter Scan Chips */}
-          <div class="hero-highlights">
-            <span class="highlight-chip">
-              <Zap size={14} class="chip-icon" />
-              Spring Boot &amp; REST APIs
-            </span>
-            <span class="highlight-chip">
-              <Code2 size={14} class="chip-icon" />
-              React.js &amp; MySQL
-            </span>
-            <span class="highlight-chip">
-              <GraduationCap size={14} class="chip-icon" />
-              M.Sc Computer Science
-            </span>
+          {/* Tech Pills */}
+          <div className="hero-tech-pills" aria-label="Core technologies">
+            {techPills.map((t) => (
+              <span key={t} className="hero-tech-pill">{t}</span>
+            ))}
           </div>
 
-          {/* Action Buttons */}
-          <div class="hero-actions">
-            <a href="#projects" class="btn btn-primary">
+          {/* CTA Buttons */}
+          <div className="hero-actions">
+            <a href="#projects" className="btn btn-primary">
               View My Projects
-              <ChevronRight size={18} />
+              <ArrowRight size={16} />
             </a>
-            
-            <a 
-              href={personalBrand.resumeUrl} 
+            <a
+              href={personalBrand.resumeUrl}
               download="Pravin_Rathod_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
             >
-              <Download size={18} />
+              <Download size={16} />
               Download Resume
             </a>
           </div>
 
           {/* Social Links */}
-          <div class="hero-socials">
-            <span class="socials-label">Connect with me:</span>
-            <div class="social-icons">
-              <a
-                href={personalBrand.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                aria-label="GitHub Profile"
-                title="GitHub"
-              >
-                <Github size={20} />
-              </a>
-              
-              <a
-                href={personalBrand.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="social-link"
-                aria-label="LinkedIn Profile"
-                title="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
-              
-              <a
-                href={personalBrand.socials.emailUrl}
-                className="social-link"
-                aria-label="Send me an email"
-                title="Email Me"
-                onClick={(e) => {
-                  window.location.href = personalBrand.socials.emailUrl;
-                  setTimeout(() => {
-                    window.open(personalBrand.socials.gmailUrl, '_blank', 'noopener,noreferrer');
-                  }, 300);
-                  e.preventDefault();
-                }}
-              >
-                <Mail size={20} />
-              </a>
-            </div>
+          <div className="hero-socials">
+            <a
+              href={personalBrand.socials.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-social-link"
+              aria-label="GitHub Profile"
+            >
+              <Github size={18} />
+            </a>
+            <a
+              href={personalBrand.socials.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hero-social-link"
+              aria-label="LinkedIn Profile"
+            >
+              <Linkedin size={18} />
+            </a>
+            <a
+              href={personalBrand.socials.emailUrl}
+              className="hero-social-link"
+              aria-label="Send email"
+              onClick={handleEmailClick}
+            >
+              <Mail size={18} />
+            </a>
+            <span className="hero-social-divider" aria-hidden="true" />
+            <span className="hero-social-email">{personalBrand.socials.email}</span>
           </div>
         </div>
 
-        {/* Right Side Visual Portrait */}
-        <div class="hero-visual">
-          <div class="portrait-wrapper">
-            <div class="portrait-glow"></div>
-            <div class="portrait-card">
-              <img
-                src={personalBrand.profileImage}
-                alt={`${personalBrand.name} - ${personalBrand.title}`}
-                class="profile-img"
-                loading="eager"
-              />
+        {/* ── Right Column — Portrait ── */}
+        <div className="hero-visual" aria-hidden="true">
+          <div className="portrait-frame">
+            <div className="portrait-glow-ring" />
+            <img
+              src={personalBrand.profileImage}
+              alt={`${personalBrand.name} — ${personalBrand.title}`}
+              className="portrait-img"
+              loading="eager"
+              onError={(e) => { e.target.style.display = 'none'; }}
+            />
+            <div className="portrait-label">
+              <span className="portrait-label-dot" />
+              Java Developer
             </div>
-            
-            {/* Open to Opportunities Badge */}
-            {personalBrand.status && (
-              <div class="status-badge glass-card">
-                <span class="status-indicator">
-                  <span class="status-ping"></span>
-                  <span class="status-dot"></span>
-                </span>
-                <span class="status-text">{personalBrand.status}</span>
-              </div>
-            )}
           </div>
         </div>
       </div>
 
-      {/* Scroll Down Indicator */}
-      <a href="#about" class="scroll-indicator" aria-label="Scroll to About section">
-        <ArrowDown size={18} />
+      {/* Scroll indicator */}
+      <a href="#about" className="hero-scroll-cue" aria-label="Scroll to About section">
+        <ArrowDown size={16} />
       </a>
     </section>
   );
